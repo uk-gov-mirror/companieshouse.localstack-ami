@@ -48,6 +48,22 @@
     name: amazon-ecr-credential-helper
     state: latest
 
+- name: Create .docker directory for root
+  ansible.builtin.file:
+    path: /root/.docker
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Configure ECR credential helper for root
+  ansible.builtin.copy:
+    src: docker-config.json
+    dest: /root/.docker/config.json
+    owner: root
+    group: root
+    mode: '0600'
+
 - name: Create .docker directory for ec2-user
   ansible.builtin.file:
     path: /home/ec2-user/.docker
