@@ -14,6 +14,12 @@
     group: ec2-user
     mode: '0600'
 
+- name: Set AWS_PROFILE in bash
+  ansible.builtin.lineinfile:
+    path: /home/ec2-user/.bashrc
+    line: 'export AWS_PROFILE=development-eu-west-2'
+    state: present
+
 - name: Install amazon-ecr-credential-helper
   ansible.builtin.dnf:
     name: amazon-ecr-credential-helper
